@@ -108,28 +108,7 @@ passes.
 
 Do not delete or weaken tests to make CI green.
 
-### 5. Fix the Node.js application
-
-Start with the failing test.
-
-Create an issue with:
-
-- problem description,
-- current behavior,
-- expected behavior,
-- acceptance criteria.
-
-Create a branch, diagnose the root cause, fix it, and ensure:
-
-```bash
-npm test
-```
-
-passes.
-
-Do not delete or weaken tests to make CI green.
-
-### 6. Node.js CI
+### 5. Node.js CI
 
 Create `.github/workflows/node-ci.yml`.
 
@@ -142,7 +121,7 @@ On pull requests and/or pushes to `main`, the workflow must:
 
 **Bonus:** dependency vulnerability scanning.
 
-### 7. Add tasks feature
+### 6. Add tasks feature
 Each student must implement one feature. Create the issue using the template, implement and test it, create the pull request.
 Another student reviews, CI pass and approval before merge.
 
@@ -188,7 +167,7 @@ Acceptance criteria:
 
 
 
-### 8. Docker
+### 7. Docker
 
 Create or improve:
 
@@ -202,7 +181,7 @@ docker build -t devops-platform-challenge .
 docker run --rm -p 3000:3000 devops-platform-challenge
 ```
 
-### 9. Docker CI/CD
+### 8. Docker CI/CD
 
 Create `.github/workflows/docker.yml`.
 
@@ -216,7 +195,7 @@ The workflow must:
 
 **Bonus:** scan the image for vulnerabilities.
 
-### 10. Terraform validation
+### 9. Terraform validation
 
 Create `.github/workflows/terraform.yml`.
 
@@ -232,7 +211,7 @@ terraform validate
 
 Trigger the workflow when Terraform files change.
 
-### 11. README
+### 10. README
 
 Produce a professional README containing:
 
