@@ -1,0 +1,14 @@
+# Default owner
+* @Akl372
+
+# Platform configuration
+/.github/ @Akl372
+
+# Application code
+/src/ @Akl372
+
+# Tests
+/test/ @Andreea720
+
+# Deployment configuration
+/deploy/ @VenusGotLost
