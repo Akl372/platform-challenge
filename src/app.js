@@ -3,9 +3,10 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
+const tasks = [];
+
 function calculateTotal(items) {
-  // INTENTIONAL DEFECT: students must diagnose this using the tests.
-  return items.reduce((total, item) => total + item.price + item.quantity, 0);
+  return items.reduce((total, item) => total + item.price * item.quantity, 0);
 }
 
 app.get("/", (_req, res) => {
@@ -17,6 +18,10 @@ app.get("/", (_req, res) => {
 
 app.get("/health", (_req, res) => {
   res.json({ status: "healthy" });
+});
+
+app.get("/tasks", (_req, res) => {
+  res.status(200).json(tasks);
 });
 
 app.get("/total", (_req, res) => {
