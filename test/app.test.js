@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { calculateTotal } = require("../src/app");
+const { app, calculateTotal } = require("../src/app");
 
 test("calculates the total for several items", () => {
   const items = [
@@ -22,4 +22,34 @@ test("does not mutate the input items", () => {
   calculateTotal(items);
 
   assert.deepEqual(items, copy);
+});
+
+test("GET /tasks returns HTTP 200 and a JSON array", async (t) => {
+  const server = app.listen(0, "127.0.0.1");
+
+  t.after(() => new Promise((resolve, reject) => {
+    server.close((error) => {
+      if (error) reject(error);
+      else resolve();
+    });
+  }));
+
+  await new Promise((resolve, reject) => {
+    server.once("listening", resolve);
+    server.once("error", reject);
+  });
+
+  const port = server.address().port;
+  const response = await fetch(`http://127.0.0.1:${port}/tasks`);
+
+  assert.equal(response.status, 200);
+  assert.match(
+    response.headers.get("content-type"),
+    /application\/json/
+  );
+
+  const tasks = await response.json();
+
+  assert.ok(Array.isArray(tasks));
+  assert.deepEqual(tasks, []);
 });
