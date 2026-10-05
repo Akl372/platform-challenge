@@ -1,6 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { calculateTotal } = require("../src/app");
+const app = require("../src/app");
+const { calculateTotal } = app; // assuming calculateTotal is attached to app
 
 test("calculates the total for several items", () => {
   const items = [
@@ -22,4 +23,19 @@ test("does not mutate the input items", () => {
   calculateTotal(items);
 
   assert.deepEqual(items, copy);
+});
+
+// --- NEW TEST FOR ISSUE #1 ---
+test("GET /tasks returns 200 and an array", async () => {
+  const server = app.listen(0); // start server on a random free port
+  const port = server.address().port;
+
+  try {
+    const response = await fetch(`http://localhost:${port}/tasks`);
+    assert.equal(response.status, 200);
+    const data = await response.json();
+    assert.equal(Array.isArray(data), true);
+  } finally {
+    server.close(); // shut down server after test
+  }
 });
